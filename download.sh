@@ -7,6 +7,12 @@
 #   ./download.sh --list         # list all available quants and sizes
 #   ./download.sh --mmproj       # download mmproj file(s) only
 set -euo pipefail
+# Reject unexpected extra arguments: a stray extra arg must never start a download.
+if [ "$#" -gt 1 ]; then
+  echo "ERROR: too many arguments (expected at most 1). Usage: ./download.sh [QUANT|--list|--mmproj|--help]" >&2
+  exit 1
+fi
+
 
 HF_REPO="HauhauCS/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced"
 BASE="https://huggingface.co/$HF_REPO/resolve/main"
@@ -28,6 +34,13 @@ files_for() {
   esac
 }
 
+if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
+  echo "Usage: ./download.sh [QUANT]"
+  echo "       ./download.sh --list        list all available quants and sizes"
+  echo "       ./download.sh --mmproj      download the mmproj vision file only"
+  echo "Default QUANT: $DEFAULT_QUANT"
+  exit 0
+fi
 if [ "${1:-}" = "--list" ]; then list_quants; exit 0; fi
 if [ "${1:-}" = "--mmproj" ]; then
   WANT="mmproj-Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-BF16.gguf|175115264|b59e815479b7e5f0665bd29e6784c104a368092bcbc63120148c606f9276ab8e"
