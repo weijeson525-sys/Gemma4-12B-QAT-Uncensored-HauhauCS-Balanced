@@ -1,0 +1,12 @@
+Gemma Terms of Use
+
+This model is distributed under the Gemma Terms of Use:
+https://ai.google.dev/gemma/terms
+
+The Gemma license text is NOT reproduced here (the LICENSE file on
+Hugging Face requires sign-in to fetch). Please read the full terms
+at the link above before using the model.
+
+Note: the base model google/gemma-4-12B-it is a gated repository on
+Hugging Face — you must first accept the Gemma terms there. This
+repository itself is gated=false and can be downloaded anonymously.
